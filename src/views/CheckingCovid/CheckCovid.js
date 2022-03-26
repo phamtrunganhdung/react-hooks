@@ -15,9 +15,10 @@ const CheckCovid = () => {
     (priorDate.getMonth() + 1) +
     "-" +
     priorDate.getDate();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     // == ComponentDidMount()
-    const fetchData = async () => {
+    setTimeout(async () => {
       let res = await axios.get(
         `https://api.covid19api.com/country/vietnam?from=${backDate}T00%3A00%3A00Z&to=${date}T00%3A00%3A00Z`
       );
@@ -27,10 +28,11 @@ const CheckCovid = () => {
           item.Date = moment(item.Date).format("DD/MM/YYYY");
           return item;
         });
+        data = data.reverse();
       }
       setDataCovid(data);
-    };
-    fetchData();
+      setLoading(false);
+    }, 500);
   }, [backDate, date]);
 
   return (
@@ -48,8 +50,7 @@ const CheckCovid = () => {
           </tr>
         </thead>
         <tbody>
-          {dataCovid &&
-            dataCovid.length > 0 &&
+          {loading === false && dataCovid && dataCovid.length > 0 ? (
             dataCovid.map((item) => {
               return (
                 <tr key={item.ID}>
@@ -59,7 +60,14 @@ const CheckCovid = () => {
                   <td>{item.Deaths}</td>
                 </tr>
               );
-            })}
+            })
+          ) : (
+            <tr>
+              <td className="loading" colSpan="5">
+                Loading ...
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
