@@ -1,0 +1,59 @@
+import { useState } from "react";
+
+import ListTodo from "./ListTodo";
+import "../Todo/Todo.scss";
+
+const Todo = () => {
+  let [todos, setTodos] = useState([
+    {
+      id: "todo1",
+      title: "Reading book",
+    },
+    {
+      id: "todo2",
+      title: "Playing game",
+    },
+    {
+      id: "todo3",
+      title: "Playing soccer",
+    },
+  ]);
+
+  const [inputAddTodo, setInputAddTodo] = useState("");
+  const handleAddTodo = () => {
+    let newTodo = {
+      id: "todo" + Math.floor(Math.random() * 10000),
+      title: inputAddTodo,
+    };
+
+    if (!inputAddTodo) {
+      alert("empty data");
+      return;
+    }
+    setTodos([...todos, newTodo]);
+    setInputAddTodo("");
+  };
+  const handleOnChangeInputAddTodo = (event) => {
+    setInputAddTodo(event.target.value);
+  };
+  const deleteTodo = (id) => {
+    todos = todos.filter((item) => item.id !== id);
+    setTodos(todos);
+  };
+  return (
+    <div className="todo-container">
+      <input
+        type="text"
+        value={inputAddTodo}
+        onChange={(e) => handleOnChangeInputAddTodo(e)}
+        placeholder="Add new todo"
+      />
+      <button className="btn btn-success" onClick={() => handleAddTodo()}>
+        Add Todo
+      </button>
+      <ListTodo todos={todos} deleteTodo={deleteTodo} />
+    </div>
+  );
+};
+
+export default Todo;
