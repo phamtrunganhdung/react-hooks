@@ -14,7 +14,7 @@ const App = () => {
         <Nav />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>React Hooks Basic</h1>
+
           <Switch>
             <Route path="/" exact>
               <Home />

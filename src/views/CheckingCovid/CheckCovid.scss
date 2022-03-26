@@ -1,0 +1,18 @@
+$darkBlue: #4e6683;
+$white: #ffffff;
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15px;
+  td,
+  th {
+    border: 1px solid $white;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even),
+  thead {
+    background-color: $darkBlue;
+  }
+}

@@ -11,7 +11,7 @@ const Todo = () => {
     },
     {
       id: "todo2",
-      title: "Playing game",
+      title: "Learn React",
     },
     {
       id: "todo3",
@@ -49,6 +49,7 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
+      <h3>Todo App</h3>
       <input
         type="text"
         value={inputAddTodo}
