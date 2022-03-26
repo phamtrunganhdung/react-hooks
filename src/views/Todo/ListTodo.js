@@ -1,5 +1,26 @@
+import { useState } from "react";
+
 const ListTodo = (props) => {
-  const { todos, deleteTodo } = props;
+  const { todos, deleteTodo, updateTodo } = props;
+  const [edit, setEdit] = useState({
+    id: null,
+    title: "",
+  });
+  const [inputUpdate, setInputUpdate] = useState("");
+  const handleOnChangeInputUpdate = (event) => {
+    setInputUpdate(event.target.value);
+  };
+  const submitUpdate = (id, value) => {
+    updateTodo(id, value);
+    setEdit({
+      id: null,
+      value: value,
+    });
+    setInputUpdate("");
+  };
+  const handleInputUpdate = (todo) => {
+    setEdit(todo);
+  };
   const handleDeleteTodo = (todo) => {
     deleteTodo(todo.id);
   };
@@ -18,15 +39,73 @@ const ListTodo = (props) => {
             return (
               <tr key={todo.id}>
                 <td>{index + 1}</td>
-                <td>{todo.title}</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDeleteTodo(todo)}
-                  >
-                    Delete
-                  </button>
-                </td>
+                {edit.id === null ? (
+                  <>
+                    <td>{todo.title}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleInputUpdate(todo)}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleDeleteTodo(todo)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    {edit.id === todo.id ? (
+                      <>
+                        <td>
+                          <input
+                            type="text"
+                            value={inputUpdate}
+                            onChange={(event) =>
+                              handleOnChangeInputUpdate(event)
+                            }
+                          />
+                        </td>
+                        <td>
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => submitUpdate(todo.id, inputUpdate)}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDeleteTodo(todo)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td>{todo.title}</td>
+                        <td>
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => handleInputUpdate(todo)}
+                          >
+                            Update
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDeleteTodo(todo)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </>
+                    )}
+                  </>
+                )}
               </tr>
             );
           })}

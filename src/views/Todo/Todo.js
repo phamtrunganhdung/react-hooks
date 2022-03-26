@@ -36,10 +36,17 @@ const Todo = () => {
   const handleOnChangeInputAddTodo = (event) => {
     setInputAddTodo(event.target.value);
   };
+  const updateTodo = (todoID, newValue) => {
+    let todosCopy = [...todos];
+    let objIndex = todosCopy.findIndex((item) => item.id === todoID);
+    todosCopy[objIndex].title = newValue;
+    setTodos(todosCopy);
+  };
   const deleteTodo = (id) => {
     todos = todos.filter((item) => item.id !== id);
     setTodos(todos);
   };
+
   return (
     <div className="todo-container">
       <input
@@ -51,7 +58,7 @@ const Todo = () => {
       <button className="btn btn-success" onClick={() => handleAddTodo()}>
         Add Todo
       </button>
-      <ListTodo todos={todos} deleteTodo={deleteTodo} />
+      <ListTodo todos={todos} deleteTodo={deleteTodo} updateTodo={updateTodo} />
     </div>
   );
 };
