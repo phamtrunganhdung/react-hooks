@@ -10,7 +10,7 @@ const ListTodo = (props) => {
   const handleOnChangeInputUpdate = (event) => {
     setInputUpdate(event.target.value);
   };
-  const submitUpdate = (id, value) => {
+  const handleUpdateTodo = (id, value) => {
     updateTodo(id, value);
     setEdit({
       id: null,
@@ -73,7 +73,9 @@ const ListTodo = (props) => {
                         <td>
                           <button
                             className="btn btn-primary"
-                            onClick={() => submitUpdate(todo.id, inputUpdate)}
+                            onClick={() =>
+                              handleUpdateTodo(todo.id, inputUpdate)
+                            }
                           >
                             Save
                           </button>
