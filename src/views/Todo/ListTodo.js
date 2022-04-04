@@ -41,16 +41,16 @@ const ListTodo = (props) => {
                 <td>{index + 1}</td>
                 {edit.id === null ? (
                   <>
-                    <td>{todo.title}</td>
+                    <td className="todo-title">{todo.title}</td>
                     <td>
                       <button
-                        className="btn btn-primary"
+                        className="button btn btn-primary"
                         onClick={() => handleInputUpdate(todo)}
                       >
                         Update
                       </button>
                       <button
-                        className="btn btn-danger"
+                        className="button btn btn-danger"
                         onClick={() => handleDeleteTodo(todo)}
                       >
                         Delete
@@ -72,7 +72,7 @@ const ListTodo = (props) => {
                         </td>
                         <td>
                           <button
-                            className="btn btn-primary"
+                            className="button btn btn-primary"
                             onClick={() =>
                               handleUpdateTodo(todo.id, inputUpdate)
                             }
@@ -80,7 +80,7 @@ const ListTodo = (props) => {
                             Save
                           </button>
                           <button
-                            className="btn btn-danger"
+                            className="button btn btn-danger"
                             onClick={() => handleDeleteTodo(todo)}
                           >
                             Delete
@@ -92,13 +92,13 @@ const ListTodo = (props) => {
                         <td>{todo.title}</td>
                         <td>
                           <button
-                            className="btn btn-primary"
+                            className="button btn btn-primary"
                             onClick={() => handleInputUpdate(todo)}
                           >
                             Update
                           </button>
                           <button
-                            className="btn btn-danger"
+                            className="button btn btn-danger"
                             onClick={() => handleDeleteTodo(todo)}
                           >
                             Delete

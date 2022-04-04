@@ -56,7 +56,10 @@ const Todo = () => {
         onChange={(e) => handleOnChangeInputAddTodo(e)}
         placeholder="Add new todo"
       />
-      <button className="btn btn-success" onClick={() => handleAddTodo()}>
+      <button
+        className="button btn btn-success"
+        onClick={() => handleAddTodo()}
+      >
         Add Todo
       </button>
       <ListTodo todos={todos} deleteTodo={deleteTodo} updateTodo={updateTodo} />
